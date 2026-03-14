@@ -179,7 +179,7 @@ html, body, #map { height: 100%; margin: 0; padding: 0; background: #000; font-f
 .ip-tooltip { background: rgba(0,0,0,0.78); color: #fff; font-size: 12px; padding: 6px 10px; border-radius: 6px; pointer-events: none; }
 
 #searchBox {
-    position: absolute; top: 10px; right: 10px; z-index: 9999;
+    position: fixed; top: 10px; right: 10px; z-index: 9999;
     background: rgba(0,0,0,0.82); color: #fff; padding: 8px;
     border-radius: 8px; width: 280px; height: 200px;
     border: none;
@@ -198,7 +198,7 @@ html, body, #map { height: 100%; margin: 0; padding: 0; background: #000; font-f
 
 
 #markerCount {
-    position: absolute; top: 10px; left: 50px; z-index: 9999;
+    position: fixed; top: 10px; left: 50px; z-index: 9999;
     background: rgba(0,0,0,0.75); color: #fff; padding: 5px 10px;
     border-radius: 6px; font-size: 12px; border: none;
     display: flex; align-items: center; gap: 6px;
@@ -213,7 +213,7 @@ html, body, #map { height: 100%; margin: 0; padding: 0; background: #000; font-f
 
 /* ---- Hack Box ---- */
 #hackBox {
-    position: absolute; right: 10px; bottom: 330px; z-index: 9999;
+    position: fixed; right: 10px; bottom: 330px; z-index: 9999;
     background: rgba(0,0,0,0.82); color: #fff; padding: 10px;
     border-radius: 8px; width: 280px; height: 240px;
     border: none;
