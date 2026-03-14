@@ -182,7 +182,7 @@ html, body { height: 100%; margin: 0; padding: 0; background: #000; font-family:
 #searchBox {
     position: absolute; top: 10px; right: 10px; z-index: 9999;
     background: rgba(0,0,0,0.82); color: #fff; padding: 8px;
-    border-radius: 8px; width: 280px; height: 200px;
+    border-radius: 8px; width: 280px; height: 220px;
     border: none;
 }
 #searchTitle {
@@ -214,7 +214,7 @@ html, body { height: 100%; margin: 0; padding: 0; background: #000; font-family:
 
 /* ---- Hack Box ---- */
 #hackBox {
-    position: absolute; right: 10px; top: 220px; z-index: 9999;
+    position: absolute; right: 10px; top: 240px; z-index: 9999;
     background: rgba(0,0,0,0.82); color: #fff; padding: 10px;
     border-radius: 8px; width: 280px; height: 240px;
     border: none;
