@@ -172,14 +172,15 @@ HTML = r'''<!DOCTYPE html>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
 *, *::before, *::after { box-sizing: border-box; }
-html, body, #map { height: 100%; margin: 0; padding: 0; background: #000; font-family: "Segoe UI", Arial, sans-serif; }
+html, body { height: 100%; margin: 0; padding: 0; background: #000; font-family: "Segoe UI", Arial, sans-serif; }
+#map { height: 100%; margin: 0; padding: 0; background: #000; position: relative; font-family: "Segoe UI", Arial, sans-serif; }
 
 .cursor-map { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="24"><text x="0" y="18" font-size="18" fill="%23f44" font-weight="bold">[ ]</text></svg>') 12 12, auto !important; }
 .leaflet-marker-icon { cursor: pointer !important; }
 .ip-tooltip { background: rgba(0,0,0,0.78); color: #fff; font-size: 12px; padding: 6px 10px; border-radius: 6px; pointer-events: none; }
 
 #searchBox {
-    position: fixed; top: 10px; right: 10px; z-index: 9999;
+    position: absolute; top: 10px; right: 10px; z-index: 9999;
     background: rgba(0,0,0,0.82); color: #fff; padding: 8px;
     border-radius: 8px; width: 280px; height: 200px;
     border: none;
@@ -198,7 +199,7 @@ html, body, #map { height: 100%; margin: 0; padding: 0; background: #000; font-f
 
 
 #markerCount {
-    position: fixed; top: 10px; left: 50px; z-index: 9999;
+    position: absolute; top: 10px; left: 50px; z-index: 9999;
     background: rgba(0,0,0,0.75); color: #fff; padding: 5px 10px;
     border-radius: 6px; font-size: 12px; border: none;
     display: flex; align-items: center; gap: 6px;
@@ -213,7 +214,7 @@ html, body, #map { height: 100%; margin: 0; padding: 0; background: #000; font-f
 
 /* ---- Hack Box ---- */
 #hackBox {
-    position: fixed; right: 10px; bottom: 330px; z-index: 9999;
+    position: absolute; right: 10px; top: 220px; z-index: 9999;
     background: rgba(0,0,0,0.82); color: #fff; padding: 10px;
     border-radius: 8px; width: 280px; height: 240px;
     border: none;
@@ -388,23 +389,24 @@ html, body, #map { height: 100%; margin: 0; padding: 0; background: #000; font-f
 </head>
 <body>
 
-<div id="map" class="cursor-map"></div>
-<div id="markerCount"><span id="liveDotMap"></span>Live Cameras: <span id="camCount">0</span></div>
+<div id="map" class="cursor-map">
+    <div id="markerCount"><span id="liveDotMap"></span>Live Cameras: <span id="camCount">0</span></div>
 
-<div id="searchBox">
-    <div id="searchTitle">IP Camera Search</div>
-    <input type="text" id="searchInput" placeholder="Search IP / ASN / Network / Org"/>
-    <div id="searchResults"></div>
-</div>
-
-<div id="hackBox">
-    <div id="hackTitle">IP Camera Hack</div>
-    <div id="hackInputRow">
-        <input id="hackIpInput" placeholder="IP:PORT  e.g. 188.134.80.244:554"/>
-        <button id="hackBtn">Hack</button>
+    <div id="searchBox">
+        <div id="searchTitle">IP Camera Search</div>
+        <input type="text" id="searchInput" placeholder="Search IP / ASN / Network / Org"/>
+        <div id="searchResults"></div>
     </div>
-    <div id="hackStatus"><span id="hackStatusDot"></span><span id="hackStatusTxt">Ready</span></div>
-    <div id="hackLog"></div>
+
+    <div id="hackBox">
+        <div id="hackTitle">IP Camera Hack</div>
+        <div id="hackInputRow">
+            <input id="hackIpInput" placeholder="IP:PORT  e.g. 188.134.80.244:554"/>
+            <button id="hackBtn">Hack</button>
+        </div>
+        <div id="hackStatus"><span id="hackStatusDot"></span><span id="hackStatusTxt">Ready</span></div>
+        <div id="hackLog"></div>
+    </div>
 </div>
 
 <!-- CCTV Modal -->
