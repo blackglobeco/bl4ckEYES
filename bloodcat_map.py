@@ -183,8 +183,11 @@ html, body { height: 100%; margin: 0; padding: 0; background: #000; font-family:
     position: absolute; top: 10px; right: 10px; z-index: 9999;
     background: rgba(0,0,0,0.82); color: #fff; padding: 8px;
     border-radius: 8px; width: 280px; height: 220px;
-    border: none;
+    border: none; overflow-y: auto;
 }
+#searchBox::-webkit-scrollbar { width: 4px; }
+#searchBox::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); border-radius: 2px; }
+#searchBox::-webkit-scrollbar-thumb { background: rgba(255,50,50,0.35); border-radius: 2px; }
 #searchTitle {
     font-size: 12px; font-weight: bold; color: #fff;
     display: flex; align-items: center; gap: 6px; letter-spacing: .5px;
@@ -218,8 +221,11 @@ html, body { height: 100%; margin: 0; padding: 0; background: #000; font-family:
     background: rgba(0,0,0,0.82); color: #fff; padding: 10px;
     border-radius: 8px; width: 280px; height: 240px;
     border: none;
-    display: flex; flex-direction: column; gap: 7px;
+    display: flex; flex-direction: column; gap: 7px; overflow-y: auto;
 }
+#hackBox::-webkit-scrollbar { width: 4px; }
+#hackBox::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); border-radius: 2px; }
+#hackBox::-webkit-scrollbar-thumb { background: rgba(255,50,50,0.35); border-radius: 2px; }
 #hackTitle {
     font-size: 12px; font-weight: bold; color: #fff;
     display: flex; align-items: center; gap: 6px; letter-spacing: .5px;
@@ -253,7 +259,7 @@ html, body { height: 100%; margin: 0; padding: 0; background: #000; font-family:
 #hackLog {
     background: #0a0a0a; border-radius: 4px; border: 1px solid rgba(255,50,50,0.12);
     padding: 6px 8px; font-size: 11px; font-family: monospace;
-    color: #ccc; max-height: 160px; overflow-y: auto; white-space: pre-wrap;
+    color: #ccc; flex: 1; min-height: 0; max-height: 160px; overflow-y: auto; white-space: pre-wrap;
     word-break: break-all; display: none;
 }
 #hackLog::-webkit-scrollbar { width: 4px; }
@@ -646,6 +652,14 @@ function loadData() {
 
 loadData();
 setInterval(loadData, 60000);
+
+// ========= Prevent map from stealing scroll on panels =========
+['searchBox', 'hackBox'].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('wheel', function(e) { e.stopPropagation(); }, { passive: true });
+    L.DomEvent.disableScrollPropagation(el);
+});
 
 // ========= Hack The Camera =========
 (function() {
