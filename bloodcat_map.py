@@ -58,8 +58,10 @@ class DataLoader(threading.Thread):
                 sys_org = data_obj.get("sys_org", "") if isinstance(data_obj, dict) else ""
                 asn = data_obj.get("asn", "") if isinstance(data_obj, dict) else ""
                 network = data_obj.get("network", "") if isinstance(data_obj, dict) else ""
+                country = data_obj.get("country", "") if isinstance(data_obj, dict) else ""
+                city = data_obj.get("city", "") if isinstance(data_obj, dict) else ""
             except Exception:
-                rtsp = ""; lalo = ""; sys_org = ""; asn = ""; network = ""
+                rtsp = ""; lalo = ""; sys_org = ""; asn = ""; network = ""; country = ""; city = ""
             m = re.search(r'@([\d\.]+):?', rtsp)
             if m and lalo:
                 ip = m.group(1)
@@ -69,6 +71,8 @@ class DataLoader(threading.Thread):
                     "sys_org": sys_org,
                     "asn": asn,
                     "network": network,
+                    "country": country,
+                    "city": city,
                     "source": source_label,
                     "icon": icon_path or "/location/color_1.png",
                     "source_url": source_url or ""
@@ -400,7 +404,7 @@ html, body { height: 100%; margin: 0; padding: 0; background: #000; font-family:
 
     <div id="searchBox">
         <div id="searchTitle">IP Camera Search</div>
-        <input type="text" id="searchInput" placeholder="Search IP / ASN / Network / Org"/>
+        <input type="text" id="searchInput" placeholder="Search IP / ASN / Country / City / Org"/>
         <div id="searchResults"></div>
     </div>
 
@@ -626,11 +630,13 @@ document.getElementById('searchInput').addEventListener('input', function() {
     if (!q) return;
     for (let ip in dataStore) {
         const item = dataStore[ip];
-        const text = `${ip} ${item.asn||''} ${item.network||''} ${item.sys_org||''}`.toLowerCase();
+        const text = `${ip} ${item.asn||''} ${item.network||''} ${item.sys_org||''} ${item.country||''} ${item.city||''}`.toLowerCase();
         if (text.includes(q)) {
             const el = document.createElement('div');
             el.className = 'searchItem';
-            el.textContent = ip + (item.sys_org ? ' \u2014 ' + item.sys_org : '');
+            const loc = [item.city, item.country].filter(Boolean).join(', ');
+            const label = item.sys_org || loc || ip;
+            el.textContent = ip + (label ? ' \u2014 ' + label : '') + (loc && item.sys_org ? ' (' + loc + ')' : '');
             el.onclick = () => {
                 const p = (''+item.lalo).split(',').map(x => parseFloat(x));
                 if (p.length >= 2) map.setView([p[0], p[1]], 10);
