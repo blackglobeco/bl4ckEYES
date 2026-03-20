@@ -218,6 +218,15 @@ html, body { height: 100%; margin: 0; padding: 0; background: #000; font-family:
     animation: blink 1.2s ease-in-out infinite;
     flex-shrink: 0;
 }
+#refreshBtn {
+    background: transparent; border: none; color: #aaa;
+    font-size: 15px; cursor: pointer; padding: 0 0 0 6px;
+    line-height: 1; transition: color .2s, transform .3s;
+    flex-shrink: 0;
+}
+#refreshBtn:hover { color: #fff; }
+#refreshBtn.spinning { animation: spin 0.6s linear; }
+@keyframes spin { to { transform: rotate(360deg); } }
 
 /* ---- Hack Box ---- */
 #hackBox {
@@ -400,7 +409,7 @@ html, body { height: 100%; margin: 0; padding: 0; background: #000; font-family:
 <body>
 
 <div id="map" class="cursor-map">
-    <div id="markerCount"><span id="liveDotMap"></span>Live Cameras: <span id="camCount">0</span></div>
+    <div id="markerCount"><span id="liveDotMap"></span>Live Cameras: <span id="camCount">0</span><button id="refreshBtn" title="Refresh">&#8635;</button></div>
 
     <div id="searchBox">
         <div id="searchTitle">IP Camera Search</div>
@@ -658,6 +667,12 @@ function loadData() {
 
 loadData();
 setInterval(loadData, 60000);
+
+// ========= Refresh button =========
+document.getElementById('refreshBtn').addEventListener('click', function() {
+    this.classList.add('spinning');
+    setTimeout(() => location.reload(), 300);
+});
 
 // ========= Prevent map from stealing scroll on panels =========
 ['searchBox', 'hackBox'].forEach(function(id) {
