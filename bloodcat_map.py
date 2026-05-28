@@ -418,10 +418,10 @@ html, body { height: 100%; margin: 0; padding: 0; background: #000; font-family:
     </div>
 
     <div id="hackBox">
-        <div id="hackTitle">IP Camera Access</div>
+        <div id="hackTitle">IP Camera Hack</div>
         <div id="hackInputRow">
             <input id="hackIpInput" placeholder="IP:PORT  e.g. 188.134.80.244:554"/>
-            <button id="hackBtn">Access</button>
+            <button id="hackBtn">Hack</button>
         </div>
         <div id="hackStatus"><span id="hackStatusDot"></span><span id="hackStatusTxt">Ready</span></div>
         <div id="hackLog"></div>
