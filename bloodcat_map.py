@@ -473,9 +473,9 @@ const map = L.map('map', {
     maxBounds: [[-85.06, -180], [85.06, 180]],
     maxBoundsViscosity: 1.0
 }).setView([20, 10], 2);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
-    subdomains: 'abcd', maxZoom: 19
+L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=a5946ab1-6966-47ed-a5b8-6eb5ab44c71e', {
+    attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://www.openstreetmap.org/">OSM</a>',
+    maxZoom: 20
 }).addTo(map);
 
 let markers = {}, dataStore = {};
